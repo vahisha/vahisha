@@ -33,9 +33,11 @@ export default function AdminSidebar() {
   const supabase = createClient()
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser()
       if (data.user) setAdminEmail(data.user.email ?? '')
-    })
+    }
+    fetchUser()
   }, [supabase])
 
   const handleLogout = async () => {

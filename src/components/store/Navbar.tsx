@@ -47,37 +47,41 @@ export default function Navbar({
   }, [])
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setUser({ email: data.user.email ?? '' })
+    const initNavbar = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      if (user) {
+        setUser({ email: user.email ?? '' })
         
         // Parallel fetch for badges - MNC performance standards
-        Promise.all([
+        const [cartRes, wishRes, orderRes] = await Promise.all([
           // Cart count
           supabase
             .from('cart_items')
             .select('quantity')
-            .eq('user_id', data.user.id),
+            .eq('user_id', user.id),
           
           // Wishlist count
           supabase
             .from('wishlists')
             .select('id', { count: 'exact', head: true })
-            .eq('user_id', data.user.id),
+            .eq('user_id', user.id),
 
           // Active orders count (excluding delivered/cancelled)
           supabase
             .from('orders')
             .select('id', { count: 'exact', head: true })
-            .eq('user_id', data.user.id)
+            .eq('user_id', user.id)
             .not('status', 'in', '("delivered", "cancelled")')
-        ]).then(([cartRes, wishRes, orderRes]) => {
-          if (cartRes.data) setCartCount(cartRes.data.reduce((s, i) => s + i.quantity, 0))
-          if (wishRes.count) setWishlistCount(wishRes.count)
-          if (orderRes.count) setActiveOrdersCount(orderRes.count)
-        })
+        ])
+
+        if (cartRes.data) setCartCount(cartRes.data.reduce((s, i) => s + i.quantity, 0))
+        if (wishRes.count) setWishlistCount(wishRes.count)
+        if (orderRes.count) setActiveOrdersCount(orderRes.count)
       }
-    })
+    }
+
+    initNavbar()
   }, [supabase])
 
   return (
