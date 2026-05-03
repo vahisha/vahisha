@@ -3,6 +3,7 @@ import ProductCard from '@/components/store/ProductCard'
 import { SlidersHorizontal, Search } from 'lucide-react'
 import Breadcrumbs from '@/components/store/Breadcrumbs'
 import type { Metadata } from 'next'
+import type { Product } from '@/types/database'
 
 export const metadata: Metadata = {
   title: 'Shop All',
@@ -68,7 +69,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
   else if (params.sort === 'bestseller') query = query.order('total_sold', { ascending: false })
   else query = query.order('created_at', { ascending: false })
 
-  const { data: products } = await query.limit(48)
+  const { data: products } = await query.limit(48) as { data: Product[] | null }
 
   const { data: categories } = await supabase
     .from('categories')
