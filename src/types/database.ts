@@ -51,6 +51,8 @@ export interface Product {
   meta_title: string | null
   meta_description: string | null
   total_sold: number
+  average_rating: number | null
+  review_count: number
   created_at: string
   updated_at: string
   // joined
