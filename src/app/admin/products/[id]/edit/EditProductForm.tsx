@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { ArrowLeft, Save, Loader2, Plus, Trash2, Image as ImageIcon } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Link from 'next/link'
@@ -11,10 +11,17 @@ export default function EditProductForm() {
   const router = useRouter()
   const params = useParams()
   const productId = params.id as string
-  const supabase = createClient()
   const { showToast } = useToast()
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null)
 
   const [loading, setLoading] = useState(true)
+
+  // Lazy-load Supabase client
+  useEffect(() => {
+    import('@/lib/supabase/client').then(({ createClient }) => {
+      setSupabase(createClient())
+    })
+  }, [])
   const [saving, setSaving] = useState(false)
   const [categories, setCategories] = useState<{id: string, name: string}[]>([])
 
@@ -38,6 +45,7 @@ export default function EditProductForm() {
 
   useEffect(() => {
     async function loadData() {
+      if (!supabase) return
       const { data: cats } = await supabase.from('categories').select('id, name').order('name')
       if (cats) setCategories(cats)
 
@@ -89,6 +97,7 @@ export default function EditProductForm() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!supabase) return
     setSaving(true)
 
     // Update Product Basic Info

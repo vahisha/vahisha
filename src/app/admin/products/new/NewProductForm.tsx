@@ -2,17 +2,24 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { ArrowLeft, Save, Image as ImageIcon, Loader2 } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Link from 'next/link'
 
 export default function NewProductForm() {
   const router = useRouter()
-  const supabase = createClient()
   const { showToast } = useToast()
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null)
   const [loading, setLoading] = useState(false)
   const [categories, setCategories] = useState<{id: string, name: string}[]>([])
+
+  // Lazy-load Supabase client
+  useEffect(() => {
+    import('@/lib/supabase/client').then(({ createClient }) => {
+      setSupabase(createClient())
+    })
+  }, [])
 
   // Form State
   const [name, setName] = useState('')
@@ -26,6 +33,7 @@ export default function NewProductForm() {
   const [isActive, setIsActive] = useState(true)
 
   useEffect(() => {
+    if (!supabase) return
     supabase.from('categories').select('id, name').order('name').then(({ data }) => {
       if (data) setCategories(data)
     })
@@ -35,6 +43,7 @@ export default function NewProductForm() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!supabase) return
     setLoading(true)
 
     const slug = slugify(name)
