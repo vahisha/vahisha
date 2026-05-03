@@ -46,7 +46,6 @@ export async function updateStoreSettings(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  return { success: true }
 }
 
 export async function updateOrderStatus(orderId: string, status: string) {
