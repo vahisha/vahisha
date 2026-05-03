@@ -75,7 +75,7 @@ export default function Navbar({
             .not('status', 'in', '("delivered", "cancelled")')
         ])
 
-        if (cartRes.data) setCartCount(cartRes.data.reduce((s, i) => s + i.quantity, 0))
+        if (cartRes.data) setCartCount(cartRes.data.reduce((s: number, i: { quantity: number }) => s + i.quantity, 0))
         if (wishRes.count) setWishlistCount(wishRes.count)
         if (orderRes.count) setActiveOrdersCount(orderRes.count)
       }
