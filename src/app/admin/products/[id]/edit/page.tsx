@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 
 const EditProductForm = dynamic(() => import('./EditProductForm'), { ssr: false })
