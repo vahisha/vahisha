@@ -3,6 +3,7 @@ import { formatDistanceToNow } from 'date-fns'
 import type { Metadata } from 'next'
 import { Eye, ShoppingCart, TrendingUp } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Insights & Behavior — Admin' }
 
 export default async function AdminInsights() {

@@ -4,6 +4,7 @@ import { ShoppingCart, Package, Users, TrendingUp, AlertTriangle, ArrowUpRight, 
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Dashboard' }
 
 export default async function AdminDashboard() {

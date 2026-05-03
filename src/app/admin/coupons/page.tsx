@@ -3,6 +3,7 @@ import { formatPrice } from '@/lib/utils'
 import { Plus, Ticket } from 'lucide-react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Coupons — Admin' }
 
 export default async function AdminCoupons() {

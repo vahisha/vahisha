@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Plus } from 'lucide-react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Categories — Admin' }
 
 export default async function AdminCategories() {

@@ -8,6 +8,8 @@ import {
   CheckCircle2, Clock, Truck, Home, Ban
 } from 'lucide-react'
 import { updateOrderStatus } from '@/app/admin/actions'
+
+export const dynamic = 'force-dynamic'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Manage Order — Admin' }

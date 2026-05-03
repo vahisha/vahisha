@@ -3,6 +3,7 @@ import { formatDistanceToNow } from 'date-fns'
 import type { Metadata } from 'next'
 import { Star, CheckCircle, XCircle } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Review Moderation — Admin' }
 
 export default async function AdminReviews() {

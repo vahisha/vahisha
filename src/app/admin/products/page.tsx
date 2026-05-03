@@ -3,6 +3,7 @@ import { formatPrice } from '@/lib/utils'
 import { Plus, Search, Edit2, Trash2, Eye, EyeOff } from 'lucide-react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Products — Admin' }
 
 export default async function AdminProducts({ searchParams }: { searchParams: Promise<{ q?: string; category?: string }> }) {

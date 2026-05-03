@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import PrintButton from './PrintButton'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Shipping Label — VAHISHA' }
 
 export default async function ShippingLabelPage({ params }: { params: Promise<{ id: string }> }) {

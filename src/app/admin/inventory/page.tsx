@@ -3,6 +3,7 @@ import { AlertTriangle, Package } from 'lucide-react'
 import QuickStockEdit from '@/components/admin/QuickStockEdit'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Inventory — Admin' }
 
 export default async function AdminInventory() {

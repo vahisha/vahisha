@@ -3,6 +3,7 @@ import { formatPrice } from '@/lib/utils'
 import { TrendingUp, ShoppingCart, Package, Users } from 'lucide-react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Reports — Admin' }
 
 export default async function AdminReports() {

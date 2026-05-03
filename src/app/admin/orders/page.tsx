@@ -4,6 +4,7 @@ import { Search, Filter, MessageSquare, ShoppingCart, Package } from 'lucide-rea
 import BulkOrderTable from '@/components/admin/BulkOrderTable'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Orders — Admin' }
 
 const statusColors: Record<string, string> = {

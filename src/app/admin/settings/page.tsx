@@ -3,6 +3,7 @@ import { Save } from 'lucide-react'
 import type { Metadata } from 'next'
 import { updateStoreSettings } from '@/app/admin/actions'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Settings — Admin' }
 
 export default async function AdminSettings() {

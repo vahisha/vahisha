@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Search } from 'lucide-react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Customers — Admin' }
 
 export default async function AdminCustomers({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
