@@ -137,7 +137,7 @@ export default async function ShippingLabelPage({ params }: { params: Promise<{ 
             {/* Barcode Placeholder */}
             <div className="flex flex-col items-center py-2">
               <div className="flex gap-px items-end h-10">
-                {order.order_number.split('').map((char, i) => (
+                {order.order_number.split('').map((char: string, i: number) => (
                   <div
                     key={i}
                     className="bg-gray-900"
