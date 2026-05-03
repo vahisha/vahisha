@@ -10,7 +10,7 @@ export default function VariantSelector({ product }: { product: Product }) {
 
   // Get unique colors and sizes from variants
   const colors = useMemo(() => {
-    const map = new Map<string, { color: string; hex: string }>()
+    const map = new Map<string, { color: string; hex: string | null }>()
     product.variants?.forEach(v => {
       if (!map.has(v.color)) {
         map.set(v.color, { color: v.color, hex: v.color_hex })
